@@ -1,13 +1,14 @@
 local Object = {}
 
 function Object:newChildClass(type)
-   self.__index = self
-   return
-      setmetatable({
-         type = type or "none",
-         parentClass = self,
-         __tostring = self.__tostring
-      }, self)
+  assert(type, "Failed to instantiate unknown class due to missing type name")
+  self.__index = self
+  return
+    setmetatable({
+      type = type,
+      parentClass = self,
+      __tostring = self.__tostring
+    }, self)
 end
 
 function Object:new()

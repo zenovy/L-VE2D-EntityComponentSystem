@@ -1,16 +1,31 @@
 local Entity = require "Base/Entity"
 local EntityManager = require "Base/EntityManager"
 
+local RenderComponent = require "Components/RenderComponent"
 local PositionComponent = require "Components/PositionComponent"
 local KinematicsSystem = require "Systems/KinematicsSystem"
+local RenderSystem = require "Systems/RenderSystem"
 
-local kinematicsSystem = KinematicsSystem:new(PositionComponent)
-local entityManager = EntityManager:new({kinematicsSystem})
+local entityManager = EntityManager:new({KinematicsSystem:new(), RenderSystem:new()})
 
-for i = 1, 1000 do
+for i = 1, 100 do
   local x, y = math.random(), math.random()
-  local position = PositionComponent:new(x, y)
-  entityManager:addEntity(Entity:new({position}))
+  entityManager:addEntity(
+    Entity:new({
+        PositionComponent:new(x, y, 1, i < 50),
+        RenderComponent:new(),
+      })
+    )
 end
 
-kinematicsSystem:update()
+function love.load()
+  if arg[#arg] == "-debug" then require("mobdebug").start() end
+end
+
+function love.update(dt)
+  entityManager:update(dt)
+end
+
+function love.draw()
+  entityManager:draw()
+end

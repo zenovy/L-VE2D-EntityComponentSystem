@@ -1,21 +1,15 @@
 local System = require "Base/System"
 local PositionComponent = require "../Components/PositionComponent"
 
-local KinematicsSystem = System:newChildClass('KinematicsSystem')
+local KinematicsSystem = System:newChildClass('KinematicsSystem', {PositionComponent})
 
-function KinematicsSystem:update()
+function KinematicsSystem:update(dt)
   local entityList = self.registeredEntities
-  local sum = {0, 0}
   for i = 1, #entityList do
-    local component = entityList[i]:getComponent(PositionComponent.type)
-    print('Entity #' .. tostring(entityList[i].id) .. ' Position = (' .. tostring(component.x) .. ', ' .. tostring(component.y) .. ')')
-    sum[1] = sum[1] + component.x
-    sum[2] = sum[2] + component.y
-  end
-  if #entityList > 0 then
-    sum[1] = sum[1] / #entityList
-    sum[2] = sum[2] / #entityList
-    print('Average position: (' .. tostring(sum[1]) .. ', ' .. tostring(sum[2]) .. ')')
+    local positionComponent = entityList[i]:getComponent(PositionComponent.type)
+    if positionComponent.isMove then
+      positionComponent.x = positionComponent.x + positionComponent.dx * dt
+    end
   end
 end
 
