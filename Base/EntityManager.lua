@@ -18,8 +18,8 @@ function EntityManager:addEntity(entity)
 
     local hasAllRequiredComponents = true
     for i = 1, #systemRequiredComponents do
-      local requiredComponent = systemRequiredComponents[i]
-      if not entity:getComponent(requiredComponent.type) then
+      local requiredComponent = systemRequiredComponents[i].type
+      if not entity:getComponent(requiredComponent) then
         hasAllRequiredComponents = false
         break
       end

@@ -12,7 +12,7 @@ function System:newChildClass(type, requiredComponents)
   local o = System.parentClass.newChildClass(self, type)
   assert(type, "Failed to declare unknown System due to missing name")
   assert(requiredComponents, "Failed to declare System '" .. type .. "': missing requiredComponents list")
-  self.requiredComponents = requiredComponents
+  o.requiredComponents = requiredComponents
   return o
 end
 

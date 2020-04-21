@@ -7,7 +7,7 @@ function RenderSystem:draw()
   local entityList = self.registeredEntities
   for i = 1, #entityList do
     local positionComponent = entityList[i]:getComponent('PositionComponent')
-    love.graphics.points(positionComponent.x * 100, positionComponent.y * 100)
+    love.graphics.points(positionComponent.x * 10, positionComponent.y * 10)
   end
 end
 
