@@ -10,4 +10,10 @@ function TranslationComponent:new(x, y, vx, vy, ax, ay)
   return o
 end
 
-return TranslationComponent
+local ComponentList = {
+  PlayerControl = Component.createNewSimpleComponentType('PlayerControlComponent'),
+  Render = Component.createNewSimpleComponentType('RenderComponent'),
+  Translation = TranslationComponent,
+}
+
+return ComponentList

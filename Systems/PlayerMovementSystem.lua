@@ -1,13 +1,13 @@
 local System = require "Base/System"
-local TranslationComponent = require "../Components/TranslationComponent"
-local PlayerControlledComponent = require "../Components/PlayerControlledComponent"
 
-local PlayerMovementSystem = System:newChildClass('PlayerMovementSystem', {TranslationComponent, PlayerControlledComponent})
+local Components = require "../Components/ComponentList"
+
+local PlayerMovementSystem = System:newChildClass('PlayerMovementSystem', {Components.Translation, Components.PlayerControl})
 
 function PlayerMovementSystem:update(dt)
   local entityList = self.registeredEntities
   for i = 1, #entityList do
-    local translationComponent = entityList[i]:getComponent(TranslationComponent.type)
+    local translationComponent = entityList[i]:getComponent(Components.Translation)
     if love.keyboard.isDown('right') then
       translationComponent.x = translationComponent.x + dt
     end

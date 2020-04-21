@@ -2,8 +2,12 @@ local Object = require "Base/Object"
 
 local EntityManager = Object:newChildClass("EntityManager")
 
-function EntityManager:new(systemList)
-  assert(systemList and #systemList > 0, "EntityManager instantiated with no systems!")
+function EntityManager:new(systemClassList)
+  assert(systemClassList and #systemClassList > 0, "EntityManager instantiated with no systems!")
+  local systemList = {}
+  for i = 1, #systemClassList do
+    table.insert(systemList, systemClassList[i]:new())
+  end
 
   local o = EntityManager.parentClass.new(self)
   o.entityList = {}
@@ -18,7 +22,7 @@ function EntityManager:addEntity(entity)
 
     local hasAllRequiredComponents = true
     for i = 1, #systemRequiredComponents do
-      local requiredComponent = systemRequiredComponents[i].type
+      local requiredComponent = systemRequiredComponents[i]
       if not entity:getComponent(requiredComponent) then
         hasAllRequiredComponents = false
         break

@@ -1,13 +1,13 @@
 local System = require "Base/System"
-local TranslationComponent = require "../Components/TranslationComponent"
-local RenderComponent = require "../Components/RenderComponent"
 
-local RenderSystem = System:newChildClass('RenderSystem', {TranslationComponent, RenderComponent})
+local Components = require "../Components/ComponentList"
+
+local RenderSystem = System:newChildClass('RenderSystem', {Components.Translation, Components.Render})
 
 function RenderSystem:draw()
   local entityList = self.registeredEntities
   for i = 1, #entityList do
-    local translationComponent = entityList[i]:getComponent('TranslationComponent')
+    local translationComponent = entityList[i]:getComponent(Components.Translation)
     love.graphics.points(translationComponent.x * 10, translationComponent.y * 10)
   end
 end

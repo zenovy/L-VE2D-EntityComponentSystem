@@ -27,8 +27,8 @@ function Entity:new(componentList)
       }, self)
 end
 
-function Entity:getComponent(type)
-  return self.componentMap[type]
+function Entity:getComponent(component)
+  return self.componentMap[component.type]
 end
 
 return Entity
