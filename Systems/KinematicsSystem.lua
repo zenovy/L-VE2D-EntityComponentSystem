@@ -1,17 +1,15 @@
 local System = require "Base/System"
 
-local MoveComponent = require "../Components/MoveComponent"
-local PositionComponent = require "../Components/PositionComponent"
+local TranslationComponent = require "../Components/TranslationComponent"
 
-local KinematicsSystem = System:newChildClass('KinematicsSystem', {PositionComponent, MoveComponent})
+local KinematicsSystem = System:newChildClass('KinematicsSystem', {TranslationComponent, MoveComponent})
 
 function KinematicsSystem:update(dt)
   local entityList = self.registeredEntities
   for i = 1, #entityList do
-    local moveComponent = entityList[i]:getComponent(MoveComponent.type)
-    local positionComponent = entityList[i]:getComponent(PositionComponent.type)
-    moveComponent.vx, moveComponent.vy = moveComponent.vx + moveComponent.ax * dt, moveComponent.vy + moveComponent.ay * dt
-    positionComponent.x, positionComponent.y = positionComponent.x + moveComponent.vx * dt, positionComponent.y + moveComponent.vy * dt
+    local translationComponent = entityList[i]:getComponent(TranslationComponent.type)
+    translationComponent.vx, translationComponent.vy = translationComponent.vx + translationComponent.ax * dt, translationComponent.vy + translationComponent.ay * dt
+    translationComponent.x, translationComponent.y = translationComponent.x + translationComponent.vx * dt, translationComponent.y + translationComponent.vy * dt
   end
 end
 
