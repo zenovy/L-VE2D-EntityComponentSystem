@@ -24,10 +24,6 @@ function System:registerEntity(entity)
   self.registeredEntities[entity.id] = entity
 end
 
-function System:update(dt)
-  assert(nil, self.name .. "has not implemented System:update")
-end
-
 -- System instances can handle these methods as they wish
 function System:update() end
 function System:draw() end
