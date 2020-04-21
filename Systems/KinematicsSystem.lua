@@ -3,7 +3,8 @@ local PositionComponent = require "../Components/PositionComponent"
 
 local KinematicsSystem = System:newChildClass('KinematicsSystem')
 
-function KinematicsSystem:run(entityList)
+function KinematicsSystem:update()
+  local entityList = self.registeredEntities
   local sum = {0, 0}
   for i = 1, #entityList do
     local component = entityList[i]:getComponent(PositionComponent.type)

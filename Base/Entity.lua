@@ -31,8 +31,4 @@ function Entity:getComponent(type)
   return self.componentMap[type]
 end
 
-function Entity:setComponent(component)
-  self.componentMap[component.type] = component
-end
-
 return Entity
