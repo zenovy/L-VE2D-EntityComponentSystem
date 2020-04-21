@@ -35,11 +35,19 @@ function EntityManager:addEntity(entity)
 end
 
 function EntityManager:update(dt)
-  for i = 1, #self.systemList do self.systemList[i]:update(dt) end
+  for i = 1, #self.systemList do
+    local system = self.systemList[i]
+    local entityList = system.registeredEntities
+    system:update(dt, entityList)
+  end
 end
 
 function EntityManager:draw()
-  for i = 1, #self.systemList do self.systemList[i]:draw() end
+  for i = 1, #self.systemList do
+    local system = self.systemList[i]
+    local entityList = system.registeredEntities
+    system:draw(entityList)
+  end
 end
 
 return EntityManager
