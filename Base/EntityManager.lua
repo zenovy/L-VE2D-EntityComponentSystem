@@ -4,13 +4,15 @@ local EntityManager = Object:newChildClass("EntityManager")
 
 function EntityManager:new(systemClassList)
   assert(systemClassList and #systemClassList > 0, "EntityManager instantiated with no systems!")
-  local systemList = {}
-  for i = 1, #systemClassList do
-    table.insert(systemList, systemClassList[i]:new())
-  end
 
   local o = EntityManager.parentClass.new(self)
   o.entityList = {}
+  local systemList = {}
+  for i = 1, #systemClassList do
+    local system = systemClassList[i]:new()
+    table.insert(systemList, system)
+    system.entityManager = o
+  end
   o.systemList = systemList
   return o
 end
@@ -34,10 +36,20 @@ function EntityManager:addEntity(entity)
   end
 end
 
+function EntityManager:removeEntity(entity)
+  for i = 1, #self.systemList do
+    local system = self.systemList[i]
+    if system.registeredEntities[entity.id] then system.registeredEntities[entity.id] = nil end
+  end
+end
+
 function EntityManager:update(dt)
   for i = 1, #self.systemList do
     local system = self.systemList[i]
-    local entityList = system.registeredEntities
+    local entityList = {}
+    for _, v in pairs(system.registeredEntities) do -- TODO: Benchmark performance and consider alternatives
+      table.insert(entityList, v)
+    end
     system:update(dt, entityList)
   end
 end
@@ -45,7 +57,10 @@ end
 function EntityManager:draw()
   for i = 1, #self.systemList do
     local system = self.systemList[i]
-    local entityList = system.registeredEntities
+    local entityList = {}
+    for _, v in pairs(system.registeredEntities) do -- TODO: Benchmark performance and consider alternatives
+      table.insert(entityList, v)
+    end
     system:draw(entityList)
   end
 end

@@ -6,8 +6,11 @@ local RenderSystem = System:newChildClass('RenderSystem', {Components.Translatio
 
 function RenderSystem:draw(entityList)
   for i = 1, #entityList do
-    local translationComponent = entityList[i]:getComponent(Components.Translation)
-    love.graphics.points(translationComponent.x * 10, translationComponent.y * 10)
+    local renderComponent = entityList[i]:getComponent(Components.Render)
+    if renderComponent.isShown then
+      local translationComponent = entityList[i]:getComponent(Components.Translation)
+      love.graphics.points(translationComponent.x * 10, translationComponent.y * 10)
+    end
   end
 end
 

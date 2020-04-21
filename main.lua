@@ -6,26 +6,28 @@ local Components = require "Components/ComponentList"
 local KinematicsSystem = require "Systems/KinematicsSystem"
 local RenderSystem = require "Systems/RenderSystem"
 local PlayerMovementSystem = require "Systems/PlayerMovementSystem"
+local DissapearingSystem = require "Systems/DissapearingSystem"
 
 local entityManager
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
 
-  entityManager = EntityManager:new({KinematicsSystem, RenderSystem, PlayerMovementSystem})
+  entityManager = EntityManager:new({DissapearingSystem, KinematicsSystem, RenderSystem, PlayerMovementSystem})
 
   for i = 1, 100 do
     local x, y = i, i
     entityManager:addEntity(
       Entity:new({
           Components.Translation:new(x, y),
-          Components.Render:new(),
+          Components.Render:new(true),
           Components.PlayerControl:new(),
+          Components.Disappearing:new()
         })
       )
     entityManager:addEntity(
       Entity:new({
           Components.Translation:new(x, y, 10, 5, -1, -1),
-          Components.Render:new(),
+          Components.Render:new(true),
         })
       )
   end

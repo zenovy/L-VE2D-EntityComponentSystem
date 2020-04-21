@@ -21,7 +21,7 @@ function System:getRequiredComponents()
 end
 
 function System:registerEntity(entity)
-  table.insert(self.registeredEntities, entity)
+  self.registeredEntities[entity.id] = entity
 end
 
 function System:update(dt)

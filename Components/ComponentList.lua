@@ -11,8 +11,9 @@ function TranslationComponent:new(x, y, vx, vy, ax, ay)
 end
 
 local ComponentList = {
+  Disappearing = Component.createNewSimpleComponentType('DisappearingComponent'),
   PlayerControl = Component.createNewSimpleComponentType('PlayerControlComponent'),
-  Render = Component.createNewSimpleComponentType('RenderComponent'),
+  Render = Component.createNewSimpleComponentType('RenderComponent', 'isShown'),
   Translation = TranslationComponent,
 }
 
