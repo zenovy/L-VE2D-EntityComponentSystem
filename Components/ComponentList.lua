@@ -1,4 +1,5 @@
 local Component = require "Base/Component"
+local CollisionComponent = require "Components/CollisionComponent"
 
 local TranslationComponent = Component:newChildClass('TranslationComponent')
 
@@ -11,9 +12,10 @@ function TranslationComponent:new(x, y, vx, vy, ax, ay)
 end
 
 local ComponentList = {
+  CollisionComponent = CollisionComponent,
   Disappearing = Component.createNewSimpleComponentType('DisappearingComponent'),
-  PlayerControl = Component.createNewSimpleComponentType('PlayerControlComponent'),
-  Render = Component.createNewSimpleComponentType('RenderComponent', 'isShown'),
+  PlayerControl = Component.createNewSimpleComponentType('PlayerControlComponent', {'isControllable'}, {}, {isControllable = true}),
+  Render = Component.createNewSimpleComponentType('RenderComponent', {'isShown'}, {}, {isShown = true}),
   Translation = TranslationComponent,
 }
 

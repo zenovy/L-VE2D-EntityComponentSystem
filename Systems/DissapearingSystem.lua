@@ -12,7 +12,7 @@ end
 
 function DissapearingSystem:update(dt)
   self.timeElapsed = self.timeElapsed + dt
-  if self.timeElapsed > 1 then
+  if self.timeElapsed > 10 then
     local entityList = self:getRegisteredEntities()
     for i = 1, #entityList do
       self.entityManager:removeEntity(entityList[i])
