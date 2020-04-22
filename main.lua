@@ -21,7 +21,7 @@ function love.load()
           Components.Translation:new(x, y),
           Components.Render:new(true),
           Components.PlayerControl:new(),
-          Components.Disappearing:new()
+          Components.Disappearing:new({timeToDisappear = 1})
         })
       )
     entityManager:addEntity(

@@ -13,9 +13,9 @@ end
 
 local ComponentList = {
   CollisionComponent = CollisionComponent,
-  Disappearing = Component.createNewSimpleComponentType('DisappearingComponent'),
-  PlayerControl = Component.createNewSimpleComponentType('PlayerControlComponent', {'isControllable'}, {}, {isControllable = true}),
-  Render = Component.createNewSimpleComponentType('RenderComponent', {'isShown'}, {}, {isShown = true}),
+  Disappearing = Component.createNewSimpleComponentType('DisappearingComponent', {'timeToDisappear'}),
+  PlayerControl = Component.createNewSimpleComponentType('PlayerControlComponent', {isControllable = true}),
+  Render = Component.createNewSimpleComponentType('RenderComponent', {isShown = true}),
   Translation = TranslationComponent,
 }
 

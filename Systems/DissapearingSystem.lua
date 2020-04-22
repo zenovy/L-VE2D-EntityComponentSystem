@@ -12,9 +12,9 @@ end
 
 function DissapearingSystem:update(dt)
   self.timeElapsed = self.timeElapsed + dt
-  if self.timeElapsed > 10 then
-    local entityList = self:getRegisteredEntities()
-    for i = 1, #entityList do
+  local entityList = self:getRegisteredEntities()
+  for i = 1, #entityList do
+    if self.timeElapsed > entityList[i]:getComponent(Components.Disappearing).timeToDisappear then
       self.entityManager:removeEntity(entityList[i])
     end
   end
