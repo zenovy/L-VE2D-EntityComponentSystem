@@ -24,6 +24,14 @@ function System:registerEntity(entity)
   self.registeredEntities[entity.id] = entity
 end
 
+function System:getRegisteredEntities()
+  local entityList = {}
+  for _, v in pairs(self.registeredEntities) do
+    table.insert(entityList, v)
+  end
+  return entityList
+end
+
 -- System instances can handle these methods as they wish
 function System:update() end
 function System:draw() end

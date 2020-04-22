@@ -4,7 +4,8 @@ local Components = require "../Components/ComponentList"
 
 local KinematicsSystem = System:newChildClass('KinematicsSystem', {Components.Translation})
 
-function KinematicsSystem:update(dt, entityList)
+function KinematicsSystem:update(dt)
+  local entityList = self:getRegisteredEntities()
   for i = 1, #entityList do
     local translationComponent = entityList[i]:getComponent(Components.Translation)
     translationComponent.vx, translationComponent.vy = translationComponent.vx + translationComponent.ax * dt, translationComponent.vy + translationComponent.ay * dt

@@ -4,7 +4,8 @@ local Components = require "../Components/ComponentList"
 
 local RenderSystem = System:newChildClass('RenderSystem', {Components.Translation, Components.Render})
 
-function RenderSystem:draw(entityList)
+function RenderSystem:draw()
+  local entityList = self:getRegisteredEntities()
   for i = 1, #entityList do
     local renderComponent = entityList[i]:getComponent(Components.Render)
     if renderComponent.isShown then

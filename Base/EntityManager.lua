@@ -46,22 +46,14 @@ end
 function EntityManager:update(dt)
   for i = 1, #self.systemList do
     local system = self.systemList[i]
-    local entityList = {}
-    for _, v in pairs(system.registeredEntities) do -- TODO: Benchmark performance and consider alternatives
-      table.insert(entityList, v)
-    end
-    system:update(dt, entityList)
+    system:update(dt)
   end
 end
 
 function EntityManager:draw()
   for i = 1, #self.systemList do
     local system = self.systemList[i]
-    local entityList = {}
-    for _, v in pairs(system.registeredEntities) do -- TODO: Benchmark performance and consider alternatives
-      table.insert(entityList, v)
-    end
-    system:draw(entityList)
+    system:draw()
   end
 end
 
