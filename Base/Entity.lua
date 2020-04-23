@@ -28,6 +28,7 @@ function Entity:new(componentList)
 end
 
 function Entity:getComponent(component)
+  if not component then return end
   return self.componentMap[component.type]
 end
 
