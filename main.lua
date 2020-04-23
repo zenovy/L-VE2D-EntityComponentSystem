@@ -18,16 +18,15 @@ function love.load()
     local x, y = i, i
     entityManager:addEntity(
       Entity:new({
-          Components.Translation:new(x, y),
-          Components.Render:new(true),
+          Components.Translation:new({x = x, y = y}),
+          Components.Render:new({isShown = true}),
           Components.PlayerControl:new(),
-          Components.Disappearing:new({timeToDisappear = 1})
         })
       )
     entityManager:addEntity(
       Entity:new({
-          Components.Translation:new(x, y, 10, 5, -1, -1),
-          Components.Render:new(true),
+          Components.Translation:new({x = x, y = y, vx = 10, vy = 5, ax = -1, ay = -1}),
+          Components.Render:new({isShown = true}),
         })
       )
   end
