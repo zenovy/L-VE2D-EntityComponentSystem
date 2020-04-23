@@ -10,8 +10,11 @@ I'm still iterating on what works best, and the sample code in main.lua will lik
 -- Create a simple component with no fields (tag)
 Component.createNewSimpleComponentType('PlayerControlComponent')
 
--- Create a simple component with required fields (e.g. x and y)
-Component.createNewSimpleComponentType('PlayerControlComponent', 'x', 'y)
+-- Create a simple component with required fields with no defaults (e.g. x and y)
+Component.createNewSimpleComponentType('PlayerControlComponent', {'x', 'y})
+
+-- Create a simple component with required fields and defaults
+Component.createNewSimpleComponentType('PlayerControlComponent', {x = 0, y = 0})
 ```
 
 ## Systems
@@ -22,7 +25,8 @@ local requiredComponents = {Components.Translation, Components.PlayerControl}
 local PlayerMovementSystem = System:newChildClass('PlayerMovementSystem', requiredComponents)
 
 -- Inherit System methods :update, :draw, or both to run on the corresponding callback
-function PlayerMovementSystem:update(dt, entityList)
+function PlayerMovementSystem:update(dt)
+  local entityList = self:getRegisteredEntities()
   for i = 1, #entityList do
     local translationComponent = entityList[i]:getComponent(Components.Translation)
     if love.keyboard.isDown('right') then
@@ -40,7 +44,7 @@ function love.load()
   entityManager = EntityManager:new({KinematicsSystem, RenderSystem, PlayerMovementSystem})
   -- Create initial entities
   entityManager:addEntity(Entity:new({
-    Components.Translation:new(0, 0),
+    Components.Translation:new({x = 0, y = 0}),
     Components.Render:new({sprite = 'myHero.png'}),
   }))
 end
