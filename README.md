@@ -3,7 +3,19 @@ EntityComponentSystem Implementation for LÖVE2D
 
 This is an implementation of the Entity-Component-System paradigm that I decided to take a crack at on a sick day.
 
-I'm still iterating on what works best, and the sample code in main.lua will likely be more up-to-date than this README, but here's the general idea:
+## Quickstart
+To run this code, download [Love2D](https://love2d.org/) and run the repo using any technique listed on their [Getting Started](https://love2d.org/wiki/Getting_Started) page. Personally, I run the following in the command line:
+```
+open -n -a love .
+```
+or, since I have it aliased,
+```
+love .
+```
+
+I also launch it directly from [ZeroBrane Studio](https://studio.zerobrane.com/) IDE while coding.
+
+I'm still iterating on the framework by trying to build simple game-like projects, and the sample code in main.lua will likely be more illustrative in how to actually use this than this README, but here's the general idea:
 
 ## Components
 ```lua
