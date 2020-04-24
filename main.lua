@@ -30,6 +30,13 @@ function love.load()
       Components.Rectangle:new({width = 20, height = 20}),
       Components.BoxCollision:new({x = -15, y = -15, width = 50, height = 50}),
     }))
+  entityManager:addEntity(
+    Entity:new({
+      Components.Translation:new({x = 100, y = 100}),
+      Components.Render:new(),
+      Components.Rectangle:new({width = 20, height = 20}),
+      Components.BoxCollision:new({x = 0, y = 0, width = 20, height = 20}),
+    }))
 --  for i = 1, 100 do
 --    local x, y = i, i
 --    entityManager:addEntity(

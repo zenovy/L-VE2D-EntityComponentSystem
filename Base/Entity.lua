@@ -32,4 +32,15 @@ function Entity:getComponent(component)
   return self.componentMap[component.type]
 end
 
+function Entity:getComponents(...)
+  local componentRequests = {...}
+  local components = {}
+  for i, v in ipairs(componentRequests) do
+    if not v then return end
+    local component = self.componentMap[v.type]
+    components[i] = component
+  end
+  return unpack(components)
+end
+
 return Entity
