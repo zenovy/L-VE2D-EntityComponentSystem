@@ -23,7 +23,7 @@ I'm still iterating on the framework by trying to build simple game-like project
 Component.createNewSimpleComponentType('PlayerControlComponent')
 
 -- Create a simple component with required fields with no defaults (e.g. x and y)
-Component.createNewSimpleComponentType('PlayerControlComponent', {'x', 'y})
+Component.createNewSimpleComponentType('PlayerControlComponent', {'x', 'y'})
 
 -- Create a simple component with required fields and defaults
 Component.createNewSimpleComponentType('PlayerControlComponent', {x = 0, y = 0})
