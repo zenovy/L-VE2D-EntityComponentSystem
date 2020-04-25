@@ -1,15 +1,19 @@
 local System = require "Base/System"
 
-local Components = require "../Components/ComponentList"
-Translation = Components.Translation
-BoxCollision = Components.BoxCollision
+local Components = require "Components/ComponentList"
+local Translation = Components.Translation
+local BoxCollision = Components.BoxCollision
+local PlayerControl = Components.PlayerControl
+
+local DataStructures = require "Utility/DataStructures"
+local Set = DataStructures.Set
 
 local CollisionSystem = System:newChildClass('CollisionSystem', {Components.BoxCollision, Components.Translation})
 
 function CollisionSystem:update(dt)
   local entityList = self:getRegisteredEntities()
   for i = 1, #entityList do
-    entityList[i]:getComponent(Components.BoxCollision).collisionList = {}
+    entityList[i]:getComponent(Components.BoxCollision).collisionSet = Set:new()
   end
   for i = 1, #entityList do
     local entity1 = entityList[i]
@@ -22,8 +26,8 @@ function CollisionSystem:update(dt)
 
       local isCollision = checkBoxCollision(boundingBox1, boundingBox2)
       if isCollision then
-        table.insert(boxCollision1.collisionList, boxCollision2)
-        table.insert(boxCollision2.collisionList, boxCollision1)
+        boxCollision1.collisionSet:add(entity2)
+        boxCollision2.collisionSet:add(entity1)
       end
     end
   end

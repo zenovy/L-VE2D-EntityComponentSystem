@@ -12,13 +12,24 @@ function RenderSystem:draw()
       local translationComponent = entityList[i]:getComponent(Components.Translation)
       local rectangleComponent = entityList[i]:getComponent(Components.Rectangle)
       if rectangleComponent then
-        local fill = entityList[i]:getComponent(Components.BoxCollision) and #(entityList[i]:getComponent(Components.BoxCollision).collisionList) > 0
+        local fill = isCollidingWithPlayer(entityList[i]:getComponent(Components.BoxCollision))
+
         love.graphics.rectangle((fill and 'fill') or 'line', translationComponent.x, translationComponent.y, rectangleComponent.width, rectangleComponent.height)
       else
         love.graphics.points(translationComponent.x * 10, translationComponent.y * 10)
       end
     end
   end
+end
+
+function isCollidingWithPlayer(collisionComponent)
+  if not (collisionComponent and collisionComponent.collisionSet) then return false end
+  for entity in collisionComponent.collisionSet:each() do
+    if entity:getComponent(Components.PlayerControl) then
+      return true
+    end
+  end
+  return false
 end
 
 return RenderSystem

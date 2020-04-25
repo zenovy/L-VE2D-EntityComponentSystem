@@ -12,11 +12,14 @@ function PlayerMovementSystem:update(dt)
     local inputSensitivity = playerControlComponent.inputSensitivity
     if love.keyboard.isDown('right') then
       translationComponent.x = translationComponent.x + dt * inputSensitivity
-    elseif love.keyboard.isDown('left') then
+    end
+    if love.keyboard.isDown('left') then
       translationComponent.x = translationComponent.x - dt * inputSensitivity
-    elseif love.keyboard.isDown('up') then
+    end
+    if love.keyboard.isDown('up') then
       translationComponent.y = translationComponent.y - dt * inputSensitivity
-    elseif love.keyboard.isDown('down') then
+    end
+    if love.keyboard.isDown('down') then
       translationComponent.y = translationComponent.y + dt * inputSensitivity
     end
   end

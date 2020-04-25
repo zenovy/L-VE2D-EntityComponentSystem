@@ -36,7 +36,7 @@ function Entity:getComponents(...)
   local componentRequests = {...}
   local components = {}
   for i, v in ipairs(componentRequests) do
-    if not v then return end
+    if not v then return end -- TODO come up with an appropriate error response based on possible edge cases
     local component = self.componentMap[v.type]
     components[i] = component
   end
